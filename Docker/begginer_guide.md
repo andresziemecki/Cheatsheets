@@ -17,6 +17,10 @@ Docker has a client-server architecture. The command interface is the client and
 
 You can test a docker in a container wich simulates the production envirnoment.
 
+# Play With Docker
+
+If you would like to use Docker and try some commands, this is a good [application](https://labs.play-with-docker.com/)
+
 # Docker Image
 See commands for images
 ```
