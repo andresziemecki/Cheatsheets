@@ -1,2 +1,2 @@
 # Cheatsheets commands
-My cheatsheets to don't forget useful commands
+My cheatsheets to not forget useful commands
