@@ -1,206 +1,4 @@
-# Storage
 
-## Databases
-
-Databases are programs that either use disk or memory to do 2 core things: record data and query data. In general, they are themselves servers that are long lived and interact with the rest of your application through network calls, with protocols on top of TCP or even HTTP.
-
-Some database only keep records in memory, and the users of such databases are aware of the fact that those records may be lost forever if the machine or process dies.
-
-For the most part though, databases needs persistance of those records, and thus cannot use memory. This means that you have to write your data to disk. Anything written to disk will remain through power loss or network partitions, so that's what it used to keep permanent records.
-
-Since machine die often in a large scale system, special disk partitions or volumenes are used by the database processes, and these volumnes can get recovered even if the machine were to go down permanently.
-
-## Disk
-
-Usually refers to either HDD (hard-disk drive) or SSD (solid-state drive). Data written to disk will persist through power failures and general machine crashes. Disk is also referred to as non-volatile storage.
-
-SSD is far faster than HDD, but also far more expensive from a financial point of view. Because of that, HDD will typically be used for data that's rarerly accessed or updated, but that's stored for a long time, an SSD will be used for data that is frequently accessed and updated.
-
-## Memory
-
-Short for Random Access Memory (RAM). Data stored in memory will be lost when the process that has written that data dies.
-
-## Persistent Storage
-
-Usually refers to disk, but it refers to any form of storage that persist if the process in charge of managing it dies.
-
-## Distribute storage
-
-Store data in multiple machine to atack different problems, like consistency por example. When we try to solve those problems, then a question may arise with your implementation: Are you going to get staleless data or the last updated one?
-
-# Latency and Throughput
-
-Two important measures of a system. Accuracy (How accurate is the data provided) and uptime (how much time is up and running vs total time) are another two measures in a system.
-
-These measurement are not correlated, if there is high latency doesn-t mean it will have high throughput.
-
-## Latency
-
-The times it takes to a certain operation to complete in a system (for example, for the client to the server and then from the server to the client). We can also split the total latency in sublatency and measure each part. Most often this measure is a time duration, like milliseconds or seconds. You should know these orders of magnitude:
-
-- Reading 1MB from RAM: 0.25ms
-- Reading 1MB from SSD: 1ms
-- Transfer 1MB over network of 1Gbps (One Giga Bit per second) is 10ms.
-- Reading 1MB from HDD: 20ms
-- Inter Continental Round trip: 150ms
-
-## Throughput
-
-The number of operations that a system can handle properly per time unit. For instance the throughput of a server can often be measured in request per seconds (RPS or QPS). Typically we measure throughput in Gbps or Mbps. In other words, how many request per second and at the same time the request can be converted into bit and then you get how many bit per seconds you have for throughput.
-
-# Availability
-
-The odds of a particular server or service being up and running at any point in time, usually measured in percentages. A server that has 99% of availability will be operational 99% of the time (This would be described as having two nines of availability). I think the opposite it's `downtime`.
-
-In other words, it's the description of a services for fault tolerances. 
-
-It's important for customer doe't have bad experience.
-
-## High Avilability
-
-Used to describe systems that have particualrly high levels of availability, typically 5 nines or more; sometimes abbreviated as `HA`.
-
-## Nines
-
-Typically refers as percentages of uptime. For example, 5 nines of availability means an uptime of 99.999% of the time. Below are the downtime expected per year depending on those 9s:
-
-```
-- 99% (two nines): 87.7 hours
-- 99.9% (three nines): 8.8 hours
-- 99.99%: 52.7 minutes
-- 99.999%: 5.3 minutes
-```
-
-## How to improve Availability
-
-You want make sure your system doesn-t have single point of failers. Which if this point fails, your ENTIRE system will fail. And we can reduce the system point of failures by adding redandancy.
-
-## Redundancy
-
-The process of replicate parts of a system in an effort to make it more reliable. By adding more servers to make your system more redundant, you will need to add a load balancer, which can fails also... So you have to add more load balancers to add redundancy
-
-## Passive redundancy
-
-If one server or load balancer fails, doesn-t matter because we have others running. Like the turbins of the airplane, if one fail, the airplane can fly smoothly without problems using just one turbine.
-
-## Active redundancy
-
-Only one or few of the machine are typically handling the traffic and doing the work. If this one fails the other machines need to know about this and have to take action to take its place. This is where `leader election` comes to play, that we are going to see it later.
-
-## SLA
-
-Short of `service-level-agreement`, an SLA is a collection of guarantees given a customer by a service provider. SLAs typically make guarantees on a system's availability, among other things. SLAs are made up of one or multiple SLOs.
-
-In other words, they garantee you X level of uptime in the system.
-
-## Reminders
-
-You want rigourous process in place to handle system failures, and handle things manually with alrtes and msgs if everything crash or something really bad happens.
-
-
-
-
-## SLO
-
-Short of `services-level objective`, an SLO is a guarantee given to the customer by a services provider. SLOs typically make guarantees on a system's availability, amongst other things. SLOs constitute an SLA.
-
-It's a component of SLA. So an SLA as multple SLOs. The percentage of garaantee of the uptime will be the SLO. If the services tells you that you will have X numbers of errors, that would be another SLO.
-
-## GCP or AWSs
-
-these providers has the SLAs in their websites. And also they provide what they will do if they fail this SLA. 
-
-# Caching
-
-Commonly used to reduce or improve the latency of a system. Or reduce the number of request you do to something very popular.
-
-**Redis** is a very popular in memory database.
-
-You can write in cache and database and they will be in sync.
-
-## Cache
-
-A peace of hardware or software that stores data, typically meant to retrieve that data faster than otherwise.
-
-Cache are often use to store to store responses to network requests as well as results of computationally-long operations.
-
-Note that data in a cache can become `stale` if the main source of truth for that data (i.e, the main data behind the cache) gets updated and the cache doesn't.
-
-## Type of Caches
-
-* Write through cash: Is a type of caching system that when you write a peace of data, your system will write that peace of data both in the cache and in the main source of truth at the same time. So the cache and the database are always in sync. THe donwside of this, is that you still need to go to the database. 
-
-* Write back cache: The server update only the cache and not the database. So now the cache will be out of sync with the database.
-THe system will asynchronally update the database with the cache. You slow down the the rpm to the database but if you loose the data in cache for some reason, you will not have the database updated and you will lose the data. 
-
-## Cache Hit
-
-When requested data is found in the cache.
-
-## Cache Miss
-
-When requested data could be found in a cache but isn't. This is typically used to refer to negative consequence of a system failure or of a poor design choice. For example:
-
-If a server goes down, our load balancer will have to forward requests to a new server, which will result in a cache miss.
-
-## Cache Eviction Policy
-
-The policy by which valus get evicted or removed from a cache. Popular cache eviction policies include **LRU** (least-recently used), **FIFO** (first-in first-out), and **LFU** (least-frequently used).
-
-## Content Delivery Network
-
-A **CDN** is a third party service that acts like a cache for your servers. Sometimes, web applications can be slow for users in a particular region if your servers are located only in another region. A CDN has servers all around the world, meaning that the latency to a CDN's servers will almost always be far better than the latency to your servers. A CDN's servers are often referred to as **PoPs** (Points of presence). Two of the most popular CDN are **Cloudfire** and **Google Cloud CDN**.
-
-## YouTube Comment section
-
-If every video update in caches the comments of the videos, caches can become stale if they haven't been updated properly in all machines, old comments will start to mix with new comments when replying comments. But we can use a unique cache like Redis to interact with all our servers instead using the cache of each machine.
-
-## When use Redis or normal caching?
-This depend on how much we care about the accuracy of the data in the system. 
-
-## Pitfails
-
-If the data we are dealing with is static data and unmutable the cache is beautiful. If the data is mutable everything starts to be tricky because you will have different data in different servers.
-
-If you don-t care about consistency, staleness, you will totally consider caching because you don-t have to worry about the potential pitfails. 
-
-## How do we actually get rid of data?
-
-Depend of the use case.
-
-1. LRU policy (get rid of the least recently used peace of data in a cache)
-2. LFU policy (get rid the least frequently used)
-3. FIFO bases
-4. Randomly
-
-# Proxies
-
-## Forward Proxy
-
-A server that sits between a client and servers and acts on behalf of a client, typically used to mask the client's identity (IP address). Note that forward proxies are refered to as just proxies.
-
-Typically configured by the client. The forward proxy get the request from the client and then to the server. Then the server respond to the fowrad proxy and finally to the client.
-
-Sometimes it is used to hide the request from the client. So, the source IP address is going to the forward proxy instead of the client. And this is how basically how VPN works, where you can access website where your country is unavailable.
-
-
-## Reverse Proxy
-
-A server that sits between clients and servers and acts on behalf of the servers, typically used for logging, load balancing, or caching.
-
-This acts on behalf of a **server**. It is configured by the server. The client think that the request go to the destination but in reality it goes to the reversed proxy. The client send the request to the proxy, proxy to the server and then the other way around.
-
-To the client there are no two entities, he doesn't see.
-
-You can also filter request some request with your reversed proxy. Or take care of login. Cache stuffs. The best use case is the load balancer.
-
-## Nginx
-
-Pronounced "engine-X" not N-jinx, Nginx is a very popular webserver that's often used as a reversed proxy and load balancer.
-
-It's a web server that can be used as a reverse proxy. 
-
-https://nginx.com
 
 # Load Balancers
 
@@ -447,3 +245,26 @@ A popular graph database that consists of nodes, relationships, properties, and 
 
 https://neo4j.com
 
+# Replication and Sharding
+
+If the databse is down, your system might be down, so that's why replication exists. The main database has all the reads and writes, but it also updates the replica. The operation sometimes might take longer because the data must be inserted in the main and the replica.
+
+Sometimes we don't have to update inmediatly like the feed of instagram. People from different countries has different database and they sync each other eventually after some interval of time.
+
+## Replication
+
+The act of duplicating the data from one server to others. This is sometime to increase the redundancy of your system and tolerate regional failures for instance. Other times you can use replication to move data closer to your clients, thus decreasing the latency of accesing specific data.
+
+## Sharding
+
+Sometimes called data partitioning, sharding is the act of splitting the database into two or more pieces called **shards** and is typically to increaste the throughput of your database. And you avoid duplicating so much data by normal replication to increaste the throughput. Popular sharding strategies include:
+
+- Sharding based on a client's region
+- Sharding based on the data being stored (User data gets stored in one shard, payments data get stored in another shard)
+- SHarding based on a hash of a column (only for structured data)
+
+Soemtimes you would like to have replicas of each shard to increase the availability and redundancy.
+
+## Hot Spot
+
+When distributing a workload on a set of servers, that workload might be spread unevenly (some shards receive more traffic that others). This can happen if your sharding key or your hashing function are suboptimal, or if your workload is naturally skewed: some servers will receive more traffic than others, that creates a *Hot Spot*.
