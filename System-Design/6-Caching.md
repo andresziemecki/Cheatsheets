@@ -19,7 +19,7 @@ Note that data in a cache can become `stale` if the main source of truth for tha
 * Write through cash: Is a type of caching system that when you write a peace of data, your system will write that peace of data both in the cache and in the main source of truth at the same time. So the cache and the database are always in sync. THe donwside of this, is that you still need to go to the database. 
 
 * Write back cache: The server update only the cache and not the database. So now the cache will be out of sync with the database.
-THe system will asynchronally update the database with the cache. You slow down the the rpm to the database but if you loose the data in cache for some reason, you will not have the database updated and you will lose the data. 
+The system will asynchronally update the database with the cache. You slow down the the rpm to the database but if you loose the data in cache for some reason, you will not have the database updated and you will lose the data. 
 
 ## Cache Hit
 
@@ -41,16 +41,16 @@ A **CDN** is a third party service that acts like a cache for your servers. Some
 
 ## YouTube Comment section
 
-If every video update in caches the comments of the videos, caches can become stale if they haven't been updated properly in all machines, old comments will start to mix with new comments when replying comments. But we can use a unique cache like Redis to interact with all our servers instead using the cache of each machine.
+If every video update in caches the comments of the videos, caches can become stale if they haven't been updated properly in all machines, old comments will start to mix with new comments when replying comments. But we can use a unique cache like **Redis** to interact with all our servers instead using the cache of each machine.
 
 ## When use Redis or normal caching?
 This depend on how much we care about the accuracy of the data in the system. 
 
-## Pitfails
+### Pitfails
 
 If the data we are dealing with is static data and unmutable the cache is beautiful. If the data is mutable everything starts to be tricky because you will have different data in different servers.
 
-If you don-t care about consistency, staleness, you will totally consider caching because you don-t have to worry about the potential pitfails. 
+If you don-t care about consistency, staleness, you will totally consider caching because you don't have to worry about the potential pitfails. 
 
 ## How do we actually get rid of data?
 

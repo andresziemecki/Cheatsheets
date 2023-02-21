@@ -1,10 +1,10 @@
 # Availability
 
-The odds of a particular server or service being up and running at any point in time, usually measured in percentages. A server that has 99% of availability will be operational 99% of the time (This would be described as having two nines of availability). I think the opposite it's `downtime`.
+The odds of a particular server or service being up and running at any point in time, usually measured in percentages. A server that has 99% of availability will be operational 99% of the time (This would be described as having two nines of availability). I think the opposite it's **downtime**.
 
 In other words, it's the description of a services for fault tolerances. 
 
-It's important for customer doe't have bad experience.
+It's important for customer to don't have bad experience.
 
 ## High Avilability
 
@@ -39,7 +39,7 @@ Only one or few of the machine are typically handling the traffic and doing the 
 
 ## SLA
 
-Short of `service-level-agreement`, an SLA is a collection of guarantees given a customer by a service provider. SLAs typically make guarantees on a system's availability, among other things. SLAs are made up of one or multiple SLOs.
+Short of *service-level-agreement*, an SLA is a collection of guarantees given a customer by a service provider. SLAs typically make guarantees on a system's availability, among other things. SLAs are made up of one or multiple SLOs.
 
 In other words, they garantee you X level of uptime in the system.
 
@@ -50,10 +50,10 @@ You want rigourous process in place to handle system failures, and handle things
 
 ## SLO
 
-Short of `services-level objective`, an SLO is a guarantee given to the customer by a services provider. SLOs typically make guarantees on a system's availability, amongst other things. SLOs constitute an SLA.
+Short of *services-level objective*, an SLO is a guarantee given to the customer by a services provider. SLOs typically make guarantees on a system's availability, amongst other things. SLOs constitute an SLA.
 
 It's a component of SLA. So an SLA as multple SLOs. The percentage of garaantee of the uptime will be the SLO. If the services tells you that you will have X numbers of errors, that would be another SLO.
 
 ## GCP or AWSs
 
-these providers has the SLAs in their websites. And also they provide what they will do if they fail this SLA. 
+These providers has the SLAs in their websites. And also they provide what they will do if they fail this SLA. 

@@ -1,6 +1,6 @@
 # Latency and Throughput
 
-Two important measures of a system. Accuracy (How accurate is the data provided) and uptime (how much time is up and running vs total time) are another two measures in a system.
+Two important measures of a system. **Accuracy** (How accurate is the data provided) and **Uptime** (how much time is up and running vs total time) are another two measures in a system.
 
 These measurement are not correlated, if there is high latency doesn-t mean it will have high throughput.
 

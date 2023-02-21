@@ -18,7 +18,7 @@ SSD is far faster than HDD, but also far more expensive from a financial point o
 
 ## Memory
 
-Short for Random Access Memory (RAM). Data stored in memory will be lost when the process that has written that data dies.
+Short for Random Access Memory (RAM). Data stored in memory will be lost when the process that has written that data dies. Usually used to cache data.
 
 ## Persistent Storage
 
