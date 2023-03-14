@@ -23,6 +23,6 @@ Our app is a stack of screens.
 Navigator.pushName('route')
 ```
 
-When pressing the back button it pops the current page.
+When pressing the back button it pops the current page. So it deletes everything it is in the current page
 
 Becareful on pushing pages that we have already in the stack.
