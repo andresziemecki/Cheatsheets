@@ -152,7 +152,8 @@ Future<Location> getLocationFromIP(String ipAddress) async {
       default:
         throw Exception(response.reasonPhrase);
     }
-  } on SocketException catch (_) {
+  } on SocketException catch (e) {
+    print("error caught, error message: $e");
     // make it explicit that a SocketException will be thrown if the network connection fails
     rethrow;
   }
