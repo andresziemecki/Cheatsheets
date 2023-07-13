@@ -17,7 +17,6 @@ Most relational database supports SQL, but not all of them.
 ## SQL Database
 
 Any database that supports SQL. This term is often used synonymosly with "Relational Database", though in practice, not every relational database supports SQL.
-
 ## NoSQL Database
 
 Any database that is not SQL compatible is called NoSQL.
@@ -28,8 +27,10 @@ A type of database transaction that has four important properties:
 
 1. **Atomicity**: The operations that construct the transaction will either **all** succeed or **all** fail. There is no in-between state. If for some reason one fails because of lost networking, all will fail.
 2. **Consistency**: The transaction cannot bring the database to an invalid state. After the transaction is commited or rolled back, the rules for each record will still apply, and all future transactions will see the effect of the past transactions. ALso named Strong Consistency.
-3. **Isolation**: The execution of multiple transaction concurrently (at the same time) will have the same effect as if they have been executed sequentially. Remember Clements example, when you begin a transaction twice (from two terminals), one will be in a wating mode till the other when will commit.
+3. **Isolation**: The execution of multiple transaction concurrently (at the same time) will have the same effect as if they have been executed sequentially. Remember Clements example, when you begin a transaction twice (from two terminals), one will be in a waiting mode till the other when will commit.
 4. **Durability**: Any commited transaction is written to non-volatile storage. It will not be undone by a crash, powr loss, or network partition.
+
+Remember Begin, Commit and Rollback
 
 ## Databse Index
 
@@ -46,3 +47,4 @@ A consistency model which is unlikly Strong Consistency. In this model, reads mi
 ## Postgress
 
 A relational database that use a dialect of SQL called [PostgreSQL](https://postgresql.org). Provides ACID transactions.
+
