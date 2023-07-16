@@ -5,6 +5,7 @@ all kind of virtual envs tutorial [here](https://www.intentionet.com/resources/n
 ### Useful commandas
 
 ```
+python -m venv .venv
 source .venv/bin/activate
 source deactivate
 pip install requirements.txt
