@@ -237,3 +237,12 @@ Continue watching the video.
 dcoker login
 
 ```
+
+# Process to build docker and push in GCP Cloud Shell 
+
+``` bash
+docker build -t gcr.io/eighth-effect-136722/name-completer-app .
+docker images -> to get image ID: bbdcdcba6456
+docker tag bbdcdcba6456 gcr.io/eighth-effect-136722/name-completer-app:v1.2
+docker push gcr.io/eighth-effect-136722/name-completer-app:v1.2
+```

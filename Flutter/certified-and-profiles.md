@@ -29,7 +29,7 @@ The prod is not allow to be debug.
 
 Steps:
 
-1. oin apple developer program (seems to cost 100usd per year)
+1. Sign apple developer program (seems to cost 100usd per year)
 3. Create a certificate of iOS developer and save to disk (This create a private key)
 4. To create a production certificate you need to follow similar steps but click in appstore and ihoc.
 5. Once registered you need to register in which device you are going to test the application.
@@ -37,8 +37,11 @@ Steps:
 before trying to push the app to your phone go to your project and
 ``` bash
 flutter clean ios
-pod instal --repo--update
+flutter pub get
+# maybe you need to delete Podfile
+cd ios 
+pod instal --repo-update
 ```
-
-
+## Check this medium post
+https://medium.com/readytowork-org/step-by-step-guide-on-generating-an-ios-certificate-preparing-for-test-flight-and-releasing-ios-99cd2eb11067
 
